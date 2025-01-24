@@ -1,0 +1,238 @@
+{
+	"name": "Vida Obligatorio",
+	"subsectionCode": "VC_VP",
+	"currencyCode": "PESO_ARG",
+	"taxes": null,
+	"coverages": [
+		{
+			"code": "ACCIDENTAL_DEATH",
+			"typeCode": "REQUIRED",
+			"calculatorTypeCode": "DEFINED_ALIQUOT",
+			"mortalityTableCode": null,
+			"taxes": [
+				{
+					"code": "IVA"
+				},
+				{
+					"code": "SEALED"
+				}
+			],
+			"values": [
+				{
+					"typeCode": "INSURED_AMOUNT",
+					"minValue": "10000.00",
+					"maxValue": "20000000.00"
+				},
+				{
+					"typeCode": "ALIQUOT_PERCENTAGE",
+					"minValue": "0.00",
+					"maxValue": "30.00"
+				},
+				{
+					"typeCode": "WITHHOLDING",
+					"minValue": "0.00",
+					"maxValue": "1000000.00"
+				},
+				{
+					"typeCode": "TECHNICAL_INTEREST",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				},
+				{
+					"typeCode": "BONUS_SURCHARGE",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				}
+			]
+		},
+		{
+			"code": "DEATH",
+			"typeCode": "ADDITIONAL",
+			"calculatorTypeCode": "ALIQUOT",
+			"mortalityTableCode": null,
+			"taxes": [
+				{
+					"code": "IVA"
+				}
+			],
+			"values": [
+				{
+					"typeCode": "INSURED_AMOUNT",
+					"minValue": "5000.00",
+					"maxValue": "10000000.00"
+				},
+				{
+					"typeCode": "ALIQUOT_PERCENTAGE",
+					"minValue": "0.00",
+					"maxValue": "20.00"
+				},
+				{
+					"typeCode": "WITHHOLDING",
+					"minValue": "0.00",
+					"maxValue": "1000000.00"
+				},
+				{
+					"typeCode": "TECHNICAL_INTEREST",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				},
+				{
+					"typeCode": "BONUS_SURCHARGE",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				}
+			]
+		},
+		{
+			"code": "DISABILITY",
+			"typeCode": "ADDITIONAL",
+			"calculatorTypeCode": "MORTALITY_TABLE",
+			"mortalityTableCode": "M080",
+			"taxes": [
+				{
+					"code": "IVA"
+				}
+			],
+			"values": [
+				{
+					"typeCode": "INSURED_AMOUNT",
+					"minValue": "1000.00",
+					"maxValue": "100000.00"
+				},
+				{
+					"typeCode": "TABLE_PERCENTAGE",
+					"minValue": "20.00",
+					"maxValue": "100.00"
+				},
+				{
+					"typeCode": "WITHHOLDING",
+					"minValue": "0.00",
+					"maxValue": "1000000.00"
+				},
+				{
+					"typeCode": "TECHNICAL_INTEREST",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				},
+				{
+					"typeCode": "BONUS_SURCHARGE",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				}
+			]
+		},
+		{
+			"code": "ITP",
+			"typeCode": "ADDITIONAL",
+			"calculatorTypeCode": "FIXED_AMOUNT",
+			"mortalityTableCode": null,
+			"taxes": [
+				{
+					"code": "IVA"
+				}
+			],
+			"values": [
+				{
+					"typeCode": "INSURED_AMOUNT",
+					"minValue": "6000.00",
+					"maxValue": "16000000.00"
+				},
+				{
+					"typeCode": "FIXED_AMOUNT",
+					"minValue": "100.00",
+					"maxValue": "200000.00"
+				},
+				{
+					"typeCode": "WITHHOLDING",
+					"minValue": "0.00",
+					"maxValue": "1000000.00"
+				},
+				{
+					"typeCode": "TECHNICAL_INTEREST",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				},
+				{
+					"typeCode": "BONUS_SURCHARGE",
+					"minValue": "0.00",
+					"maxValue": "100.00"
+				}
+			]
+		}
+	],
+	"expenses": [
+		{
+			"code": "EXP_ADM",
+			"calculatorTypeCode": "ALIQUOT",
+			"calculatorValueTypeCode": "TARIFF_PRIME",
+			"calculatorFrequencyCode": "ALWAYS",
+			"minValue": "0",
+			"maxValue": "100"
+		},
+		{
+			"code": "COM",
+			"calculatorTypeCode": "ALIQUOT",
+			"calculatorValueTypeCode": "TARIFF_PRIME",
+			"calculatorFrequencyCode": "ALWAYS",
+			"minValue": "0",
+			"maxValue": "100"
+		}
+	],
+	"wordings": [
+		{
+			"code": "RAC"
+		},
+		{
+			"code": "SCUI"
+		},
+		{
+			"code": "DEF"
+		}
+	],
+	"lifeData": {
+		"productLifeValues": [
+			{
+				"typeCode": "MIN_QUANTITY_INSURED",
+				"minValue": "2",
+				"maxValue": "10"
+			},
+			{
+				"typeCode": "MAX_QUANTITY_INSURED_BY_EVENT",
+				"minValue": "2",
+				"maxValue": "10"
+			},
+			{
+				"typeCode": "MIN_AGE",
+				"minValue": "18",
+				"maxValue": null
+			},
+			{
+				"typeCode": "MAX_AGE",
+				"minValue": null,
+				"maxValue": "70"
+			},
+			{
+				"typeCode": "MAX_AMOUNT_TO_INDEMNIFY",
+				"minValue": null,
+				"maxValue": "20000000"
+			}
+		],
+		"productLifeInsurableTypeValues": [
+			{
+				"insurableTypeCode": "SON",
+				"values": [
+					{
+						"typeCode": "MIN_AGE",
+						"minValue": "18",
+						"maxValue": "27"
+					},
+					{
+						"typeCode": "MAX_AGE",
+						"minValue": "80",
+						"maxValue": "100"
+					}
+				]
+			}
+		]
+	}
+}

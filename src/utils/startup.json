@@ -1,0 +1,68 @@
+{
+	"code": "PRODUCTION_MODULE",
+	"labelCode": "production-module",
+	"path": null,
+	"menus": [
+		{
+			"code": "QUOTATION_MENU",
+			"labelCode": "quotation-menu",
+			"path": null,
+			"menus": [
+				{
+					"code": "QUOTATION_CREATE_MENU",
+					"labelCode": "quotation-create-subtitle",
+					"path": null,
+					"menus": null,
+					"actions": null
+				},
+				{
+					"code": "QUOTATION_SEARCH_MENU",
+					"labelCode": "quotation-search-subtitle",
+					"path": null,
+					"menus": null,
+					"actions": null
+				}
+			],
+			"actions": null
+		},
+		{
+			"code": "REQUEST_MENU",
+			"labelCode": "request-menu",
+			"path": null,
+			"menus": [
+				{
+					"code": "REQUEST_CREATE_MENU",
+					"labelCode": "request-create-subtitle",
+					"path": null,
+					"menus": null,
+					"actions": null
+				},
+				{
+					"code": "REQUEST_SEARCH_MENU",
+					"labelCode": "request-search-subtitle",
+					"path": null,
+					"menus": null,
+					"actions": null
+				}
+			],
+			"actions": null
+		},
+		{
+			"code": "SUBSCRIPTION_MENU",
+			"labelCode": "subscription-menu",
+			"path": null,
+			"menus": [
+				{
+					"code": "SUBSCRIPTION_SEARCH_MENU",
+					"labelCode": "subscription-search-subtitle",
+					"path": null,
+					"menus": null,
+					"actions": null
+				}
+			],
+			"actions": null
+		}
+	],
+	"services": null,
+	"labels": []
+}

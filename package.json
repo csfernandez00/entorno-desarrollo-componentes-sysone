@@ -1,0 +1,56 @@
+{
+	"name": "production",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "webpack --mode production --config config/webpack.prod.js",
+		"build:dev": "webpack --mode development",
+		"build:start": "cd dist && PORT=3005 npx serve",
+		"start": "webpack serve --config config/webpack.dev.js",
+		"start:live": "webpack serve --config config/webpack.dev.js --live-reload --hot"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Belux",
+		"email": "ignaciotata@gmail.com"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.15.8",
+		"@babel/plugin-transform-runtime": "^7.15.8",
+		"@babel/preset-env": "^7.15.8",
+		"@babel/preset-react": "^7.14.5",
+		"autoprefixer": "^10.1.0",
+		"babel-loader": "^8.2.2",
+		"css-loader": "^6.3.0",
+		"html-webpack-plugin": "^5.3.2",
+		"postcss": "^8.2.1",
+		"postcss-loader": "^4.1.0",
+		"style-loader": "^3.3.0",
+		"webpack": "^5.57.1",
+		"webpack-cli": "^4.10.0",
+		"webpack-dev-server": "^4.15.0",
+		"webpack-merge": "^5.8.0"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^4.7.0",
+		"@babel/runtime": "^7.13.10",
+		"@hookform/resolvers": "^2.8.8",
+		"antd": "^4.24.16",
+		"axios": "^0.27.2",
+		"dotenv-webpack": "^7.1.0",
+		"file-saver": "^2.0.5",
+		"html-react-parser": "^3.0.1",
+		"moment": "^2.29.3",
+		"pdf-lib": "^1.17.1",
+		"react": "^17.0.2",
+		"react-credit-cards-2": "^1.0.3",
+		"react-csv": "^2.2.2",
+		"react-dom": "^17.0.2",
+		"react-hook-form": "^7.28.0",
+		"react-icons": "^4.3.1",
+		"react-quill": "^2.0.0",
+		"react-router-dom": "^5.2.0",
+		"styled-components": "^5.3.5",
+		"sysone-endpoints-demo": "^1.0.34",
+		"yup": "^0.32.11"
+	}
+}
