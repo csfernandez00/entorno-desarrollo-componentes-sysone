@@ -4,7 +4,7 @@ import { Form, Input, Button, Select, Tooltip, Divider } from "antd";
 
 import { Footer } from "../../../../styles";
 import FloatingLabel from "../../../../../../floatingLabel/FloatingLabel";
-import { useTranslation } from "../../../../../../contexts/translationContext";
+
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 import { ButtonsFixedFooter, Buttons } from "../../styles";
 const { Option } = Select;
@@ -12,9 +12,9 @@ const { Option } = Select;
 export default function CreatePaymentDebit({
 	onCreate,
 	setAddPaymentMethodMode,
-	fixedFooter,
+	fixedFooter, t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [banks, setBanks] = useState([]);
 	const [bankAccountTypes, setBankAccountTypes] = useState([]);

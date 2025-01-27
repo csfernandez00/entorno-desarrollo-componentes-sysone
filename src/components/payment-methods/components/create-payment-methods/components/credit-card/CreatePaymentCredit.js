@@ -4,7 +4,6 @@ import { Form, Input, Button, Select, DatePicker, Row, Divider } from "antd";
 import moment from "moment";
 
 import { Footer } from "../../../../styles";
-import { useTranslation } from "../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../floatingLabel/FloatingLabel";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 import { ButtonsFixedFooter, Buttons } from "../../styles";
@@ -16,9 +15,9 @@ export default function CreatePaymentCredit({
 	setAddPaymentMethodMode,
 	handleInputChange,
 	handleInputFocus,
-	fixedFooter,
+	fixedFooter, t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [creditCardTypes, setCreditCardTypes] = useState([]);
 	const [creditCardProviders, setCreditCardProviders] = useState([]);

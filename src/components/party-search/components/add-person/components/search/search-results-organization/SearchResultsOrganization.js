@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { Action, EmptyResults, Inner, Title } from "./styles";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import CreateOrganization from "../create-organization/CreateOrganization";
 
 export default function SearchResultsOrganization({
@@ -13,8 +12,8 @@ export default function SearchResultsOrganization({
 	submitting,
 	createData,
 	setCreatingParty,
+	t
 }) {
-	const { t } = useTranslation();
 	const [modalVisible, setModalVisible] = useState(false);
 
 	useEffect(() => {
@@ -62,6 +61,7 @@ export default function SearchResultsOrganization({
 					createData={createData}
 					setCreatingParty={setCreatingParty}
 					setModalVisible={setModalVisible}
+					t={t}
 				/>
 			) : submitting || (results && results?.length > 0) || (!results && !submitting) ? (
 				<Table

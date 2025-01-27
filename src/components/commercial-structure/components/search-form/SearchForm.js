@@ -9,7 +9,7 @@ import {
 	message,
 } from "antd";
 import FloatingLabel from "../../../../floatingLabel/FloatingLabel";
-import { useTranslation } from "../../../../contexts/translationContext";
+
 import { LargeButton, LabelStructureCode } from "./styles";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 import PersonTypeSelector from "../../../../common/person-type-selector/PersonTypeSelector";
@@ -18,8 +18,9 @@ const SearchForm = ({
 	onSearch,
 	setSearchingIntermediary,
 	setIntermediarySelected,
+	t
 }) => {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 	const [personType, setPersonType] = useState("INDIVIDUAL");
@@ -100,6 +101,7 @@ const SearchForm = ({
 						value={personType}
 						onChange={onPersonTypeSelect}
 						minified={true}
+						t={t}
 					/>
 				</Col>
 

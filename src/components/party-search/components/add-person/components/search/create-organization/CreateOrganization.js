@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Error, Errors, Inner } from "./styles";
 import { Form, Input, Button, Select, DatePicker, notification } from "antd";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import moment from "moment";
 import {
@@ -18,8 +17,9 @@ export default function CreateOrganization({
 	createData,
 	setCreatingParty,
 	setModalVisible,
+	t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 	const [formValues, setFormValues] = useState(null);

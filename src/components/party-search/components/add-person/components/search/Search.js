@@ -4,15 +4,13 @@ import PersonTypeSelector from "../../../../../../common/person-type-selector/Pe
 import SearchFormOrganization from "./search-form-organization/SearchFormOrganization";
 import SearchFormPerson from "./search-form-person/SearchFormPerson";
 import SearchResultsPerson from "./search-results-person/SearchResultsPerson";
-import { useTranslation } from "../../../../../../contexts/translationContext";
 import { Controls, Inner, Results, Introductory } from "./styles";
 import moment from "moment";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 import { Col, Modal, Row } from "antd";
 import { SectionTitle } from "../../../../styles";
 
-export default function Search({ onSelect, onCancelSearch, title }) {
-	const { t } = useTranslation();
+export default function Search({ onSelect, onCancelSearch, title, t }) {
 	const [personType, setPersonType] = useState("INDIVIDUAL");
 	const [data, setData] = useState(null);
 	const [resultsTitle, setResultsTitle] = useState(null);
@@ -198,24 +196,28 @@ export default function Search({ onSelect, onCancelSearch, title }) {
 							}}
 							gutter={10}
 						>
-							<Col span={4}><PersonTypeSelector
-								actions={null}
-								value={personType}
-								onChange={onPersonTypeSelect}
-								minified={true}
-							/></Col>
+							<Col span={4}>
+								<PersonTypeSelector
+									t={t}
+									actions={null}
+									value={personType}
+									onChange={onPersonTypeSelect}
+									minified={true}
+								/></Col>
 
 							<Col span={20}>{personType === "INDIVIDUAL" ? (
 								<SearchFormPerson
 									onCancelSearch={onCancelSearch}
 									onFound={handleFound}
 									setLoading={setLoading}
+									t={t}
 								/>
 							) : (
 								<SearchFormOrganization
 									onCancelSearch={onCancelSearch}
 									onFound={handleFound}
 									setLoading={setLoading}
+									t={t}
 								/>
 							)}</Col>
 						</Row>
@@ -232,6 +234,7 @@ export default function Search({ onSelect, onCancelSearch, title }) {
 							createData={createData}
 							submitting={loading}
 							setCreatingParty={setCreatingParty}
+							t={t}
 						/>
 					) : (
 						<SearchResultsOrganization
@@ -243,6 +246,7 @@ export default function Search({ onSelect, onCancelSearch, title }) {
 							createData={createData}
 							submitting={loading}
 							setCreatingParty={setCreatingParty}
+							t={t}
 						/>
 					)}
 				</Results>

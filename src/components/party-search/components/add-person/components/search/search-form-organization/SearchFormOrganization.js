@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Select, Col, Row } from "antd";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { Buttons } from "./styles";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
@@ -10,9 +9,9 @@ const { Option } = Select;
 export default function SearchFormOrganization({
 	onCancelSearch,
 	onFound,
-	setLoading,
+	setLoading, t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 	const [noResults, setNoResults] = useState(false);

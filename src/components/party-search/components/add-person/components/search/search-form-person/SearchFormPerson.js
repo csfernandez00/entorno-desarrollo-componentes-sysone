@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Select, Row, Col } from "antd";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { Buttons } from "./styles";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
@@ -11,8 +10,9 @@ export default function SearchFormPerson({
 	onCancelSearch,
 	onFound,
 	setLoading,
+	t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 	const [countries, setCountries] = useState([]);

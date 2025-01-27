@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form, Input, Row, Select } from "antd";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 
 const { Option } = Select;
 const GUTTER = 7;
 
-export default function Email({ form }) {
-	const { t } = useTranslation();
+export default function Email({ form, t }) {
+
 	const [emailTypes, setEmailTypes] = useState([]);
 
 	const formValues = Form.useWatch([], form);

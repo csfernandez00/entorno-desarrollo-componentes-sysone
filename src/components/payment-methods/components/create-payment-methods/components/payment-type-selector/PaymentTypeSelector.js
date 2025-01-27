@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Select } from "antd";
 import FloatingLabel from "../../../../../../floatingLabel/FloatingLabel";
 import { Inner } from "./styles";
-import { useTranslation } from "../../../../../../contexts/translationContext";
 
 const { Option } = Select;
 
-export default function PaymentTypeSelector({ onSelect }) {
-	const { t } = useTranslation();
+export default function PaymentTypeSelector({ onSelect, t }) {
+
 	const [paymentType, setPaymentType] = useState(null);
 
 	const paymentTypes = [

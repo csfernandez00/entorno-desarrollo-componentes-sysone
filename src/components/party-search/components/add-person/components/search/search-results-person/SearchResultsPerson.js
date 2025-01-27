@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { Action, EmptyResults, Inner, Title } from "./styles";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import CreatePerson from "../create-person/CreatePerson";
 
 export default function SearchResultsPerson({
@@ -13,8 +12,9 @@ export default function SearchResultsPerson({
 	createData,
 	submitting,
 	setCreatingParty,
+	t
 }) {
-	const { t } = useTranslation();
+
 	const [modalVisible, setModalVisible] = useState(false);
 
 	useEffect(() => {
@@ -69,6 +69,7 @@ export default function SearchResultsPerson({
 					setCreatingParty={setCreatingParty}
 					setModalVisible={setModalVisible}
 					onSelect={onSelect}
+					t={t}
 				/>
 			) : submitting || (results && results?.length > 0) || (!results && !submitting) ? (
 				<Table

@@ -26,6 +26,7 @@ function PruebaUsoComponente() {
                     }}
                     title={t("party-search-title")}
                     onCancel={() => setVisible(false)}
+                    t={t}
                 />
             }
             <Button onClick={() => setVisible(true)}>Abrir modal</Button>

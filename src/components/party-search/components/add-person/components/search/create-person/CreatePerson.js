@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Inner } from "./styles";
 import { Form, Input, Button, Select, DatePicker } from "antd";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import moment from "moment";
 import {
@@ -17,9 +16,10 @@ export default function CreatePerson({
 	createData,
 	setCreatingParty,
 	setModalVisible,
-	onSelect
+	onSelect,
+	t
 }) {
-	const { t } = useTranslation();
+
 	const [form] = Form.useForm();
 	const [submitting, setSubmitting] = useState(false);
 	const [formValues, setFormValues] = useState(null);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DatePicker, Form, Input, Select } from "antd";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
+
 import { Row, Col } from "antd";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
@@ -9,8 +9,7 @@ import { apiCall, endpoints } from "sysone-endpoints-demo";
 const { Option } = Select;
 const GUTTER = 7;
 
-export default function OrganizationInformation({ form }) {
-	const { t } = useTranslation();
+export default function OrganizationInformation({ form, t }) {
 	const [countries, setCountries] = useState(null);
 	const [organizationTypes, setOrganizationTypes] = useState(null);
 	const [identificationTypes, setIdentificationTypes] = useState(null);

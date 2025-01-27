@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
+
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 const { Option } = Select;
@@ -10,8 +10,8 @@ const { Option } = Select;
 const GUTTER = 7;
 const SECTION_NAME = "phones";
 
-export default function Phones({ form }) {
-	const { t } = useTranslation();
+export default function Phones({ form, t }) {
+
 	const [phoneTypes, setPhoneTypes] = useState([]);
 	const formValues = Form.useWatch([], form);
 	useEffect(() => {

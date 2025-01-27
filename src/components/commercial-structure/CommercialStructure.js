@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchForm from "./components/search-form/SearchForm";
 import SearchResults from "./components/search-results/SearchResults";
 import { Button, Col, Modal } from "antd";
-import { useTranslation } from "../../contexts/translationContext";
+
 
 function CommercialStructure({
 	intermediarySelected,
@@ -12,9 +12,9 @@ function CommercialStructure({
 	visible,
 	handleCancelCommercialStructure,
 	results,
-	setResults
+	setResults, t
 }) {
-	const { t } = useTranslation()
+
 
 	const [totalItems, setTotalItems] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
@@ -53,6 +53,7 @@ function CommercialStructure({
 					onSearch={onSearch}
 					setSearchingIntermediary={setSearchingIntermediary}
 					setIntermediarySelected={setIntermediarySelected}
+					t={t}
 				/>
 				<SearchResults
 					results={results}
@@ -65,6 +66,7 @@ function CommercialStructure({
 					searchingIntermediary={searchingIntermediary}
 					intermediarySelected={intermediarySelected}
 					setIntermediarySelected={setIntermediarySelected}
+					t={t}
 				/>
 
 			</Col>

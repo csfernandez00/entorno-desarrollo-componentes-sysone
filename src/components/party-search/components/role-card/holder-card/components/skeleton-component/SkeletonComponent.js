@@ -1,11 +1,9 @@
 import { Skeleton, Row, Col, Button, Divider } from "antd";
 import React from "react";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import { Inner } from "./styles";
 
-export default function SkeletonComponent() {
-	const { t } = useTranslation();
+export default function SkeletonComponent({ t }) {
 	return (
 		<DataContainer>
 			<DataContainer.Section>{t("taker-data-subtitle")}</DataContainer.Section>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useTranslation } from "../../contexts/translationContext";
+
 import { IconButton, Inner } from "./styles";
 import { IoBusinessOutline, IoPersonOutline } from "react-icons/io5";
 import { Radio } from "antd";
@@ -12,8 +12,8 @@ export default function PersonTypeSelector({
 	actions,
 	minified,
 	includeOrganisation = true,
+	t
 }) {
-	const { t } = useTranslation();
 	const { hasAction } = useActions();
 
 	const handleChange = (e) => {

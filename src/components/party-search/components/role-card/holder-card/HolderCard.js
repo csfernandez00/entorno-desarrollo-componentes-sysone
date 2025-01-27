@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import React, { useEffect } from "react";
-import { useTranslation } from "../../../../../contexts/translationContext";
+
 import DataContainer from "../../../../../common/data-container/DataContainer";
 import { Inner, ErrorMessage, Container } from "./styles";
 import { PlusOutlined, CloseCircleOutlined } from "@ant-design/icons";
@@ -15,8 +15,9 @@ export default function HolderCard({
 	validatationErrorHolder,
 	loadingSkeleton,
 	canModifyRequest,
+	t
 }) {
-	const { t } = useTranslation();
+
 
 	if (loadingSkeleton) return <SkeletonComponent />;
 

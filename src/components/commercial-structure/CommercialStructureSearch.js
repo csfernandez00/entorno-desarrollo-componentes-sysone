@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import CommercialStructure from './CommercialStructure'
-import { TranslationProvider } from '../../contexts/translationContext';
 
-export const CommercialStructureSearch = ({ visible, setVisible, onCommercialStructureSelected }) => {
+export const CommercialStructureSearch = ({ visible, setVisible, onCommercialStructureSelected, t }) => {
     const [intermediarySelected, setIntermediarySelected] = useState(null);
     const [results, setResults] = useState(null);
 
@@ -19,22 +18,22 @@ export const CommercialStructureSearch = ({ visible, setVisible, onCommercialStr
     };
 
     return (
-        <TranslationProvider>
 
-            <CommercialStructure
-                onSelected={onSelected}
-                intermediarySelected={intermediarySelected}
-                setIntermediarySelected={setIntermediarySelected}
-                setModalCommercialStructureVisible={
-                    setVisible
-                }
-                visible={visible}
-                handleCancelCommercialStructure={handleCancelCommercialStructure}
-                results={results}
-                setResults={setResults}
-            />
+        <CommercialStructure
+            onSelected={onSelected}
+            intermediarySelected={intermediarySelected}
+            setIntermediarySelected={setIntermediarySelected}
+            setModalCommercialStructureVisible={
+                setVisible
+            }
+            visible={visible}
+            handleCancelCommercialStructure={handleCancelCommercialStructure}
+            results={results}
+            setResults={setResults}
+            t={t}
+        />
 
-        </TranslationProvider >
+
     )
 }
 

@@ -1,21 +1,21 @@
 import React from "react";
 import CreatePaymentMethods from "./components/create-payment-methods/CreatePaymentMethods";
-import { TranslationProvider } from "../../contexts/translationContext";
+
 
 export const PaymentMethods = ({
 	onAddPaymentMethod,
 	addPaymentMethodMode,
 	setAddPaymentMethodMode,
 	fixedFooter,
+	t
 }) => {
 	return (
-		<TranslationProvider>
-			<CreatePaymentMethods
-				onAddPaymentMethod={onAddPaymentMethod}
-				addPaymentMethodMode={addPaymentMethodMode}
-				setAddPaymentMethodMode={setAddPaymentMethodMode}
-				fixedFooter={fixedFooter}
-			/>
-		</TranslationProvider>
+		<CreatePaymentMethods
+			onAddPaymentMethod={onAddPaymentMethod}
+			addPaymentMethodMode={addPaymentMethodMode}
+			setAddPaymentMethodMode={setAddPaymentMethodMode}
+			fixedFooter={fixedFooter}
+			t={t}
+		/>
 	);
 };

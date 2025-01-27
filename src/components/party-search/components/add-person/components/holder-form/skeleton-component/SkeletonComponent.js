@@ -1,10 +1,10 @@
 import { Skeleton, Row, Col } from "antd";
 import React from "react";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 
-export default function SkeletonComponent() {
-	const { t } = useTranslation();
+
+export default function SkeletonComponent({ t }) {
+
 	return (
 		<>
 			<DataContainer>

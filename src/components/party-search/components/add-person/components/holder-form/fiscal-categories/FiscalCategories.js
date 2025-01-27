@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Col, Form, Row, Select } from "antd";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import { ErrorMessage } from "./styles";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 
@@ -14,9 +13,9 @@ export default function FiscalCategories({
 	personType,
 	form,
 	setErrorMessage,
-	errorMessage,
+	errorMessage, t
 }) {
-	const { t } = useTranslation();
+
 	const [fiscalCategories, setFiscalCategories] = useState([]);
 
 	const residenceCountryCode = Form.useWatch("residenceCountryCode", form);

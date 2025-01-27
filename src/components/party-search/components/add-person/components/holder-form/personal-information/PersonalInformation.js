@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Select } from "antd";
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
 import { Row, Col } from "antd";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
@@ -10,8 +9,8 @@ const { Option } = Select;
 
 const GUTTER = 7;
 
-export default function PersonalInformation({ form }) {
-	const { t } = useTranslation();
+export default function PersonalInformation({ form, t }) {
+
 	const [genders, setGenders] = useState([]);
 	const [countries, setCountries] = useState([]);
 	const [identificationTypes, setIdentificationTypes] = useState([]);

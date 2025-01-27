@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import HolderForm from "./components/holder-form/HolderForm";
 import SearchForm from "./components/search/Search";
-import { useTranslation } from "../../../../contexts/translationContext";
 
 export default function AddPerson({
 	title,
 	onCancel,
-	onPartySelected
-
+	onPartySelected,
+	t,
 }) {
-	const { t } = useTranslation();
+
 
 	const handlePersonFound = (person) => {
 		onPartySelected({
@@ -38,6 +36,7 @@ export default function AddPerson({
 
 
 	return <SearchForm
+		t={t}
 		onCancelSearch={onCancel}
 		onSelect={handlePersonFound}
 		title={title}

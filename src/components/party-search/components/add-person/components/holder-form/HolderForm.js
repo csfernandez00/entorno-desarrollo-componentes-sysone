@@ -5,7 +5,6 @@ import OrganizationInformation from "./organization-information/OrganizationInfo
 import { Inner, Buttons } from "./styles";
 import Phones from "./phones/Phones";
 import FiscalCategories from "./fiscal-categories/FiscalCategories";
-import { useTranslation } from "../../../../../../contexts/translationContext";
 import SkeletonComponent from "./skeleton-component/SkeletonComponent";
 import Email from "./email/Email";
 import Layout from "../../../../../../common/layout";
@@ -24,8 +23,9 @@ export default function HolderForm({
 	setErrorMessage,
 	onFinishAdd,
 	form,
+	t
 }) {
-	const { t } = useTranslation();
+
 
 	const [submitting, setSubmitting] = useState(false);
 
@@ -57,19 +57,19 @@ export default function HolderForm({
 				}
 			>
 				{personType === "INDIVIDUAL" ? (
-					<PersonalInformation form={form} />
+					<PersonalInformation form={form} t={t} />
 				) : (
-					<OrganizationInformation form={form} />
+					<OrganizationInformation form={form} t={t} />
 				)}
 
-				<Email form={form} />
-				<Phones form={form} />
-				<Address personType={personType} form={form} />
+				<Email form={form} t={t} />
+				<Phones form={form} t={t} />
+				<Address personType={personType} form={form} t={t} />
 				<FiscalCategories
 					personType={personType}
 					form={form}
 					errorMessage={errorMessage}
-					setErrorMessage={setErrorMessage}
+					setErrorMessage={setErrorMessage} t={t}
 				/>
 				<Footer>
 					<Divider />

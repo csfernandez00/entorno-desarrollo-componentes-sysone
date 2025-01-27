@@ -9,15 +9,13 @@ import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import moment from "moment";
 import { Footer } from "../../styles";
-import { useTranslation } from "../../../../contexts/translationContext";
 
 const CreatePaymentMethods = ({
 	onAddPaymentMethod,
 	setAddPaymentMethodMode,
 	availablePaymentMethods,
-	fixedFooter,
+	fixedFooter, t
 }) => {
-	const { t } = useTranslation();
 	const [payments, setPayments] = useState(null);
 	const [selectedPaymentType, setSelectedPaymentType] = useState(null);
 	const [state, setState] = useState({
@@ -90,7 +88,7 @@ const CreatePaymentMethods = ({
 					/>
 				</div>
 			) : null}
-			<PaymentTypeSelector onSelect={handlePaymentTypeSelect} />
+			<PaymentTypeSelector onSelect={handlePaymentTypeSelect} t={t} />
 			{selectedPaymentType === "CREDIT" && (
 				<CreatePaymentCredit
 					payments={payments}
@@ -100,6 +98,7 @@ const CreatePaymentMethods = ({
 					handleInputChange={handleInputChange}
 					handleInputFocus={handleInputFocus}
 					fixedFooter={fixedFooter}
+					t={t}
 				/>
 			)}
 			{selectedPaymentType === "DEBIT" && (
@@ -109,6 +108,7 @@ const CreatePaymentMethods = ({
 					availablePaymentMethods={availablePaymentMethods}
 					setAddPaymentMethodMode={setAddPaymentMethodMode}
 					fixedFooter={fixedFooter}
+					t={t}
 				/>
 			)}
 			{selectedPaymentType === "CASH" && (
@@ -118,6 +118,7 @@ const CreatePaymentMethods = ({
 					availablePaymentMethods={availablePaymentMethods}
 					setAddPaymentMethodMode={setAddPaymentMethodMode}
 					fixedFooter={fixedFooter}
+					t={t}
 				/>
 			)}
 		</Inner>

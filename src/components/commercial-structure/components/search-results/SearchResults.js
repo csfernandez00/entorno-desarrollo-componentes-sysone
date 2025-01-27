@@ -9,7 +9,7 @@ import {
 	Actions,
 	Action,
 } from "./styles";
-import { useTranslation } from "../../../../contexts/translationContext";
+
 import SkeletonComponent from "./skeleton-component/SkeletonComponent";
 import DataContainer from "../../../../common/data-container/DataContainer";
 import { apiCall, endpoints } from "sysone-endpoints-demo"
@@ -28,8 +28,8 @@ export default function SearchResults({
 	onSearch,
 	intermediarySelected,
 	setIntermediarySelected,
+	t
 }) {
-	const { t } = useTranslation();
 	const [searchingStructures, setSearchingStructures] = useState(false);
 
 	const search_structures = async (code) => {

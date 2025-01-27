@@ -10,7 +10,7 @@ import {
 	Space,
 } from "antd";
 import FloatingLabel from "../../../../../../../floatingLabel/FloatingLabel";
-import { useTranslation } from "../../../../../../../contexts/translationContext";
+
 import DataContainer from "../../../../../../../common/data-container/DataContainer";
 import { apiCall, endpoints } from "sysone-endpoints-demo";
 
@@ -19,8 +19,8 @@ const GUTTER = 7;
 const { Option } = Select;
 const { TextArea } = Input;
 
-export default function Address({ form, personType }) {
-	const { t } = useTranslation();
+export default function Address({ form, personType, t }) {
+
 	const [provinces, setProvinces] = useState([]);
 	const [cities, setCities] = useState([]);
 	const [postalCodes, setPostalCodes] = useState([]);
