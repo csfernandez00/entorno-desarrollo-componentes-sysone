@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Inner } from "./styles";
-import { Form, Input, Button, Select, DatePicker, Row, Divider } from "antd";
+import { Form, Input, Button, Select, DatePicker, Row, Divider, Col } from "antd";
 import moment from "moment";
 
 import { Footer } from "../../../../styles";
@@ -15,13 +15,35 @@ export default function CreatePaymentCredit({
 	setAddPaymentMethodMode,
 	handleInputChange,
 	handleInputFocus,
-	fixedFooter, t
+	fixedFooter,
+	t,
+	onCancel
 }) {
 
 	const [form] = Form.useForm();
 	const [creditCardTypes, setCreditCardTypes] = useState([]);
 	const [creditCardProviders, setCreditCardProviders] = useState([]);
 	const [focused, setFocused] = useState("");
+
+	const formatCardNumber = (e) => {
+		const value = e.target.value
+		// Elimina todo lo que no sea un número
+		const numericValue = value.replace(/\D/g, '');
+
+		console.log("Value para Post", numericValue)
+		handleInputChange(numericValue, "cardNumber")
+		// Limita a 16 dígitos
+		const truncatedValue = numericValue.slice(0, 16);
+		// Formatea cada 4 dígitos
+		return truncatedValue.replace(/(\d{4})(?=\d)/g, '$1-');
+	};
+
+	const handleChange = (e) => {
+		e.preventDefault()
+		const formattedValue = formatCardNumber(e);
+		form.setFieldsValue({ number: formattedValue });
+		console.log("formattedValue", formattedValue)
+	};
 
 	const formValues = Form.useWatch([], form);
 
@@ -57,7 +79,7 @@ export default function CreatePaymentCredit({
 						.name,
 				},
 				ownerName: values.name,
-				number: values.number,
+				number: values.number.replace(/\D/g, ''),
 				securityCode: 999,
 				dateFrom: null,
 				dateTo: moment(values.expiry).format("yyyy-MM-DD"),
@@ -78,29 +100,6 @@ export default function CreatePaymentCredit({
 				layout="vertical"
 				onFinish={onFinish}
 			>
-				<FloatingLabel
-					label={t("card-type-lbl")}
-					value={formValues?.card_type}
-					hint={t("card-type-hint")}
-				>
-					<Form.Item
-						name="card_type"
-						rules={[
-							{
-								required: true,
-								message: t("field-required-lbl"),
-							},
-						]}
-					>
-						<Select allowClear={true}>
-							{creditCardTypes.map((cardType) => (
-								<Option key={cardType.code} value={cardType.code}>
-									{cardType.name}
-								</Option>
-							))}
-						</Select>
-					</Form.Item>
-				</FloatingLabel>
 				<FloatingLabel
 					label={t("supplier-lbl")}
 					value={formValues?.card_provider}
@@ -127,6 +126,62 @@ export default function CreatePaymentCredit({
 						</Select>
 					</Form.Item>
 				</FloatingLabel>
+				<Row gutter={20}>
+					<Col span={12}>
+						<FloatingLabel
+							label={t("card-type-lbl")}
+							value={formValues?.card_type}
+							hint={t("card-type-hint")}
+						>
+							<Form.Item
+								name="card_type"
+								rules={[
+									{
+										required: true,
+										message: t("field-required-lbl"),
+									},
+								]}
+							>
+								<Select allowClear={true}>
+									{creditCardTypes.map((cardType) => (
+										<Option key={cardType.code} value={cardType.code}>
+											{cardType.name}
+										</Option>
+									))}
+								</Select>
+							</Form.Item>
+						</FloatingLabel>
+					</Col>
+					<Col span={12}>
+						<FloatingLabel
+							label={t("due-date-lbl")}
+							value={formValues?.expiry}
+							hint={t("due-date-hint")}
+							style={{ flex: "1 1" }}
+						>
+							<Form.Item
+								name="expiry"
+								rules={[
+									{
+										required: true,
+										message: t("field-required-lbl"),
+									},
+								]}
+							>
+								<DatePicker
+									format="MM/YY"
+									allowClear={true}
+									style={{ width: "100%" }}
+									placeholder=""
+									picker="month"
+									disabled={!formValues?.card_provider}
+									name="expiry"
+									onFocus={handleInputFocus}
+									onChange={(date) => handleInputChange(date, null)}
+								/>
+							</Form.Item>
+						</FloatingLabel></Col>
+				</Row>
 
 				<FloatingLabel
 					label={t("name-lbl")}
@@ -172,6 +227,10 @@ export default function CreatePaymentCredit({
 								max: 50,
 								message: t("maximum-character-lbl", 50),
 							},
+							{
+								min: 19,
+								message: t("sixteen-numbers-needed-lbl"),
+							},
 						]}
 					>
 						<Input
@@ -179,7 +238,8 @@ export default function CreatePaymentCredit({
 							disabled={!formValues?.card_provider}
 							name="number"
 							onFocus={handleInputFocus}
-							onChange={(e) => handleInputChange(e.target.value, e)}
+							onChange={handleChange}
+							maxLength={19}
 							onKeyDown={(e) =>
 								/[A-Za-z]$/.test(e.key) &&
 								e.key !== "Backspace" &&
@@ -191,34 +251,7 @@ export default function CreatePaymentCredit({
 					</Form.Item>
 				</FloatingLabel>
 
-				<FloatingLabel
-					label={t("due-date-lbl")}
-					value={formValues?.expiry}
-					hint={t("due-date-hint")}
-					style={{ flex: "1 1" }}
-				>
-					<Form.Item
-						name="expiry"
-						rules={[
-							{
-								required: true,
-								message: t("field-required-lbl"),
-							},
-						]}
-					>
-						<DatePicker
-							format="MM/YY"
-							allowClear={true}
-							style={{ width: "100%" }}
-							placeholder=""
-							picker="month"
-							disabled={!formValues?.card_provider}
-							name="expiry"
-							onFocus={handleInputFocus}
-							onChange={(date) => handleInputChange(date, null)}
-						/>
-					</Form.Item>
-				</FloatingLabel>
+
 
 				<Form.Item>
 					{fixedFooter ? (
@@ -227,7 +260,10 @@ export default function CreatePaymentCredit({
 							<ButtonsFixedFooter>
 								<Button
 									type="secondary"
-									onClick={() => setAddPaymentMethodMode(false)}
+									onClick={() => {
+										setAddPaymentMethodMode(false);
+										onCancel();
+									}}
 									htmlType="button"
 								>
 									{t("cancel-btn")}
@@ -241,7 +277,10 @@ export default function CreatePaymentCredit({
 						<Buttons>
 							<Button
 								type="secondary"
-								onClick={() => setAddPaymentMethodMode(false)}
+								onClick={() => {
+									setAddPaymentMethodMode(false);
+									onCancel();
+								}}
 								htmlType="button"
 							>
 								{t("cancel-btn")}

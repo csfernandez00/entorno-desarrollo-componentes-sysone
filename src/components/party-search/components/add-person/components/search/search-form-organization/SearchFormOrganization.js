@@ -93,7 +93,7 @@ export default function SearchFormOrganization({
 							name="name"
 							rules={[
 								{
-									required: formValues?.residenceCountryCode ? false : true,
+									required: formValues?.identificationValue ? false : true,
 									message: t("field-required-lbl"),
 								},
 								{

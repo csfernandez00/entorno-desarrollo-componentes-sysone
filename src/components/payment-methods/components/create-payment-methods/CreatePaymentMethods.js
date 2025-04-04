@@ -30,7 +30,10 @@ const CreatePaymentMethods = ({
 	const handleInputChange = (value, evt) => {
 		if (evt === "provider") {
 			setState((prev) => ({ ...prev, provider: value }));
-		} else {
+		} else if (evt === "cardNumber") {
+			setState((prev) => ({ ...prev, number: value }));
+		}
+		else {
 			if (evt && evt.target) {
 				const { name, value } = evt.target;
 				setState((prev) => ({ ...prev, [name]: value }));
@@ -71,8 +74,28 @@ const CreatePaymentMethods = ({
 	};
 
 	const onCreate = (paymentMethods) => {
+
 		onAddPaymentMethod(paymentMethods);
+		setState({
+			number: "",
+			expiry: "",
+			cvc: "",
+			name: "",
+			focus: "",
+			provider: "",
+		})
 	};
+
+	const onCancel = () => {
+		setState({
+			number: "",
+			expiry: "",
+			cvc: "",
+			name: "",
+			focus: "",
+			provider: "",
+		})
+	}
 
 	return (
 		<Inner>
@@ -98,6 +121,7 @@ const CreatePaymentMethods = ({
 					handleInputChange={handleInputChange}
 					handleInputFocus={handleInputFocus}
 					fixedFooter={fixedFooter}
+					onCancel={onCancel}
 					t={t}
 				/>
 			)}

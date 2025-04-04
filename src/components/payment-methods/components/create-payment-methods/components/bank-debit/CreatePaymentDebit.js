@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Inner } from "./styles";
-import { Form, Input, Button, Select, Tooltip, Divider } from "antd";
+import { Form, Input, Button, Select, Tooltip, Divider, Row, Col } from "antd";
 
 import { Footer } from "../../../../styles";
 import FloatingLabel from "../../../../../../floatingLabel/FloatingLabel";
@@ -132,7 +132,7 @@ export default function CreatePaymentDebit({
 					</Form.Item>
 				</FloatingLabel>
 
-				<FloatingLabel
+				<Row gutter={20}><Col span={12}><FloatingLabel
 					label={t("account-type-lbl")}
 					value={formValues?.debit_accountType}
 					hint={t("account-type-hint")}
@@ -155,6 +155,35 @@ export default function CreatePaymentDebit({
 						</Select>
 					</Form.Item>
 				</FloatingLabel>
+				</Col><Col span={12}><FloatingLabel
+					label={t("currency-lbl")}
+					value={formValues?.debit_currency}
+					hint={t("currency-hint")}
+				>
+					<Form.Item
+						name="debit_currency"
+						rules={[
+							{
+								required: true,
+								message: t("field-required-lbl"),
+							},
+						]}
+					>
+						<Select
+							allowClear={true}
+							disabled={
+								!formValues?.bank || !currencies || currencies?.length === 0
+							}
+						>
+							{currencies.map((currency) => (
+								<Option key={currency.code} value={currency.code}>
+									{currency.name}
+								</Option>
+							))}
+						</Select>
+					</Form.Item>
+				</FloatingLabel></Col>
+				</Row>
 
 				{/* <FloatingLabel
 					label={t("branch-office-lbl")}
@@ -222,38 +251,20 @@ export default function CreatePaymentDebit({
 							},
 						]}
 					>
-						<Input type="number" disabled={!formValues?.bank} />
+						<Input
+							type="text"
+							disabled={!formValues?.bank}
+							maxLength={22}
+							onChange={(e) => {
+								const value = e.target.value.replace(/\D/g, ''); // Solo números
+								if (value.length <= 22) {
+									form.setFieldsValue({ debit_cbu: value });
+								}
+							}} />
 					</Form.Item>
 				</FloatingLabel>
 
-				<FloatingLabel
-					label={t("currency-lbl")}
-					value={formValues?.debit_currency}
-					hint={t("currency-hint")}
-				>
-					<Form.Item
-						name="debit_currency"
-						rules={[
-							{
-								required: true,
-								message: t("field-required-lbl"),
-							},
-						]}
-					>
-						<Select
-							allowClear={true}
-							disabled={
-								!formValues?.bank || !currencies || currencies?.length === 0
-							}
-						>
-							{currencies.map((currency) => (
-								<Option key={currency.code} value={currency.code}>
-									{currency.name}
-								</Option>
-							))}
-						</Select>
-					</Form.Item>
-				</FloatingLabel>
+
 
 				<Form.Item>
 					{fixedFooter ? (
