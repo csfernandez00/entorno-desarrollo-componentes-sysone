@@ -6,15 +6,17 @@ import { useTranslation } from '../contexts/translationContext';
 import { Button, Col, Row } from 'antd';
 import { CommercialStructureSearch } from "sysone-endpoints-demo"
 import { PaymentMethods } from './payment-methods/PaymentMethods';
-import { FinishedProcess } from './finished-process/FinishedProcess';
-import { DataSelectedCard } from './data-selected-card/DataSelectedCard';
+// import { FinishedProcess } from './finished-process/FinishedProcess';
+import { FinishedProcess } from "sysone-endpoints-demo"
+// import { DataSelectedCard } from './data-selected-card/DataSelectedCard';
+import { DataSelectedCard } from "sysone-endpoints-demo"
 import { UserOutlined } from '@ant-design/icons';
 
 function PruebaUsoComponente() {
     const [visible, setVisible] = useState(true)
     const { t } = useTranslation()
     return (
-        <div>
+        <div style={{ padding: "5rem" }}>
             {/* <CommercialStructureSearch
                 visible={visible}
                 setVisible={setVisible}
@@ -49,7 +51,7 @@ function PruebaUsoComponente() {
                     title={"Proceso finalizado!"}
                     values={[
                         { name: "Holder", value: "Juan Perez" },
-                        { name: "Nro cotizacion", value: "124" },
+                        { name: "Nro cotizacion", value: 124 },
                         { name: "Code", value: "3859bd1b-d4f7-471c-ba62-82c1ee48f189" },
                     ]}
                     contentWidth={"400px"}
@@ -71,20 +73,20 @@ function PruebaUsoComponente() {
                     <h3 style={{ textAlign: "center" }}>children text </h3>
                 </FinishedProcess>
             }
-
-            {/* {visible && <DataSelectedCard
+            {/* 
+            {visible && <DataSelectedCard
                 values={[
-                    { icon: null, name: "Holder", value: "Juan Perezzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" },
+                    { icon: <UserOutlined />, name: "Holder", value: "Juan Perez" },
                     { icon: null, name: "Nro cotizacion", value: "124" },
                     { icon: null, name: "Code", value: "3859bd1b-d4f7-471c-ba62-82c1ee48f189" },
                 ]}
                 cardTitle={"Juan Perez"}
                 onClose={() => console.log("Closing")}
-                cardWidth={800}
+                cardWidth={400}
             />} */}
 
 
-            <Button onClick={() => setVisible(true)}>Abrir modal</Button>
+            {/* <Button onClick={() => setVisible(true)}>Abrir modal</Button> */}
         </div >
     )
 }
