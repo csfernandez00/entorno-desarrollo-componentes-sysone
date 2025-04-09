@@ -8,8 +8,8 @@ import { CommercialStructureSearch } from "sysone-endpoints-demo"
 import { PaymentMethods } from './payment-methods/PaymentMethods';
 // import { FinishedProcess } from './finished-process/FinishedProcess';
 import { FinishedProcess } from "sysone-endpoints-demo"
-// import { DataSelectedCard } from './data-selected-card/DataSelectedCard';
-import { DataSelectedCard } from "sysone-endpoints-demo"
+import { DataSelectedCard } from './data-selected-card/DataSelectedCard';
+// import { DataSelectedCard } from "sysone-endpoints-demo"
 import { UserOutlined } from '@ant-design/icons';
 
 function PruebaUsoComponente() {
@@ -45,7 +45,7 @@ function PruebaUsoComponente() {
             />} */}
 
 
-
+            {/* 
             {visible &&
                 <FinishedProcess
                     title={"Proceso finalizado!"}
@@ -72,8 +72,8 @@ function PruebaUsoComponente() {
                 >
                     <h3 style={{ textAlign: "center" }}>children text </h3>
                 </FinishedProcess>
-            }
-            {/* 
+            } */}
+
             {visible && <DataSelectedCard
                 values={[
                     { icon: <UserOutlined />, name: "Holder", value: "Juan Perez" },
@@ -83,7 +83,8 @@ function PruebaUsoComponente() {
                 cardTitle={"Juan Perez"}
                 onClose={() => console.log("Closing")}
                 cardWidth={400}
-            />} */}
+                disabled={true}
+            />}
 
 
             {/* <Button onClick={() => setVisible(true)}>Abrir modal</Button> */}

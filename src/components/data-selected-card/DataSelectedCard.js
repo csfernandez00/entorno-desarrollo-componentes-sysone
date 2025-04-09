@@ -8,12 +8,13 @@ export const DataSelectedCard = ({
     onClose,
     values,
     cardWidth,
+    disabled
 }) => {
     return (
         <Card
             title={cardTitle}
             extra={
-                <CloseCircleOutlined style={{ color: "red", cursor: "pointer" }} onClick={onClose} />
+                <CloseCircleOutlined style={{ color: disabled ? "grey" : "red", cursor: disabled ? "not-allowed" : "pointer" }} onClick={disabled ? null : onClose} />
             }
             style={{ width: cardWidth ?? 400, boxShadow: "2px 2px 5px #00000020" }}
         >
