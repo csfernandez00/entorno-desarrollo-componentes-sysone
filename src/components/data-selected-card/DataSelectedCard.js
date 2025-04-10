@@ -77,6 +77,7 @@ export const DataSelectedCard = ({
 
 const expandedStyles = {
     maxHeight: 2000,
+    paddingBlock: 6,
     transition: "all 300ms ease",
 };
 

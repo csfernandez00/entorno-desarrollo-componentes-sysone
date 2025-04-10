@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
-import { PartySearch } from './party-search/PartySearch'
+import React, { useState } from "react";
+import { PartySearch } from "./party-search/PartySearch";
 // import { PartySearch } from 'sysone-endpoints-demo';
-import { useTranslation } from '../contexts/translationContext';
+import { useTranslation } from "../contexts/translationContext";
 // import { CommercialStructureSearch } from './commercial-structure/CommercialStructureSearch';
-import { Button, Col, Row } from 'antd';
-import { CommercialStructureSearch } from "sysone-endpoints-demo"
-import { PaymentMethods } from './payment-methods/PaymentMethods';
+import { Button, Col, Row } from "antd";
+import { CommercialStructureSearch } from "sysone-endpoints-demo";
+import { PaymentMethods } from "./payment-methods/PaymentMethods";
 // import { FinishedProcess } from './finished-process/FinishedProcess';
-import { FinishedProcess } from "sysone-endpoints-demo"
-import { DataSelectedCard } from './data-selected-card/DataSelectedCard';
+import { FinishedProcess } from "sysone-endpoints-demo";
+import { DataSelectedCard } from "./data-selected-card/DataSelectedCard";
 // import { DataSelectedCard } from "sysone-endpoints-demo"
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from "@ant-design/icons";
 
 function PruebaUsoComponente() {
-    const [visible, setVisible] = useState(true)
-    const { t } = useTranslation()
+    const [visible, setVisible] = useState(true);
+    const { t } = useTranslation();
     return (
         <div style={{ padding: "5rem" }}>
             {/* <CommercialStructureSearch
@@ -43,7 +43,6 @@ function PruebaUsoComponente() {
                 setAddPaymentMethodMode={setVisible}
                 t={t}
             />} */}
-
 
             {/* 
             {visible &&
@@ -74,22 +73,32 @@ function PruebaUsoComponente() {
                 </FinishedProcess>
             } */}
 
-            {visible && <DataSelectedCard
-                values={[
-                    { icon: <UserOutlined />, name: "Holder", value: "Juan Perez" },
-                    { icon: null, name: "Nro cotizacion", value: "124" },
-                    { icon: null, name: "Code", value: "3859bd1b-d4f7-471c-ba62-82c1ee48f189" },
-                ]}
-                cardTitle={"Juan Perez"}
-                onClose={() => console.log("Closing")}
-                cardWidth={400}
-                disabled={true}
-            />}
+            {visible && (
+                <DataSelectedCard
+                    values={[
+                        {
+                            icon: <UserOutlined />,
+                            name: "Holder",
+                            value: "Juan Perez",
+                        },
+                        { icon: null, name: "Nro cotizacion", value: "124" },
+                        {
+                            icon: null,
+                            name: "Code",
+                            value: "3859bd1b-d4f7-471c-ba62-82c1ee48f189",
+                        },
+                    ]}
+                    cardTitle={"Juan Perez"}
+                    onClose={() => console.log("Closing")}
+                    cardWidth={400}
+                    disabled={true}
+                />
+            )}
 
 
             {/* <Button onClick={() => setVisible(true)}>Abrir modal</Button> */}
-        </div >
-    )
+        </div>
+    );
 }
 
-export default PruebaUsoComponente
+export default PruebaUsoComponente;
