@@ -37,6 +37,7 @@
 		"antd": "^4.24.16",
 		"axios": "^0.27.2",
 		"dotenv-webpack": "^7.1.0",
+		"exceljs": "^4.4.0",
 		"file-saver": "^2.0.5",
 		"html-react-parser": "^3.0.1",
 		"moment": "^2.29.3",
@@ -50,7 +51,8 @@
 		"react-quill": "^2.0.0",
 		"react-router-dom": "^5.2.0",
 		"styled-components": "^5.3.5",
-		"sysone-endpoints-demo": "^1.0.40",
+		"sysone-endpoints-demo": "^1.0.41",
+		"xlsx": "^0.18.5",
 		"yup": "^0.32.11"
 	}
 }
