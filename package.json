@@ -51,7 +51,7 @@
 		"react-quill": "^2.0.0",
 		"react-router-dom": "^5.2.0",
 		"styled-components": "^5.3.5",
-		"sysone-endpoints-demo": "^1.0.41",
+		"sysone-endpoints-demo": "^1.0.43",
 		"xlsx": "^0.18.5",
 		"yup": "^0.32.11"
 	}

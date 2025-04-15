@@ -11,7 +11,7 @@ import { FinishedProcess } from "sysone-endpoints-demo";
 import { DataSelectedCard } from "./data-selected-card/DataSelectedCard";
 // import { DataSelectedCard } from "sysone-endpoints-demo"
 import { InboxOutlined, UserOutlined } from "@ant-design/icons";
-import { downloadTemplate, handleFileMassiveImport } from "./massive-import/MassiveImport";
+import { downloadTemplate, handleFileMassiveImport } from "sysone-endpoints-demo"
 
 
 function PruebaUsoComponente() {
@@ -56,17 +56,6 @@ function PruebaUsoComponente() {
             width: "4%",
             onCell: (_, index) => ({ style: { padding: ".35rem 0 0 .5rem" } }),
 
-        },
-        {
-            title: 'Sector',
-            dataIndex: 'sector',
-            key: 'sector',
-            ellipsis: {
-                showTitle: false,
-            },
-            width: "12%",
-            onCell: (_, index) => ({ style: { padding: ".35rem 0 0 .5rem" } }),
-            options: ["AGRICULTURA", "TECH"]
         },
         {
             title: 'Practica',
