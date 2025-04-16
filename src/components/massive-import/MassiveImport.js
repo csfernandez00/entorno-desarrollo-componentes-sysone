@@ -2,13 +2,17 @@ import * as excelJs from 'exceljs';
 import * as XLSX from "xlsx";
 import { openNotificationWithIcon, TYPE } from '../../utils/notificationToast';
 
-export const downloadTemplate = async (columns) => {
+export const downloadTemplate = async (columns, data = []) => {
     const workbook = new excelJs.Workbook();
     const ws = workbook.addWorksheet('Test Worksheet');
 
     const columnHeaders = columns.map((col) => col.dataIndex);
     ws.addRow(columnHeaders);
 
+    data.forEach((item) => {
+        const rowData = columns.map((col) => item[col.dataIndex] ?? '');
+        ws.addRow(rowData);
+    });
 
     ws.columns.forEach((_, index) => {
         ws.getColumn(index + 1).width = 18;
@@ -18,7 +22,6 @@ export const downloadTemplate = async (columns) => {
         if (col.options && col.options.length > 0) {
             const columnLetter = String.fromCharCode(65 + index);
             const formula = `"${col.options.join(',')}"`;
-
             ws.dataValidations.add(`${columnLetter}2:${columnLetter}99999`, {
                 type: 'list',
                 allowBlank: false,
@@ -63,6 +66,7 @@ export const downloadTemplate = async (columns) => {
 };
 
 
+
 export const handleFileMassiveImport = (file, setterFunction) => {
     try {
         let fileTypes = [
@@ -93,14 +97,6 @@ export const handleFileMassiveImport = (file, setterFunction) => {
                         )
                     );
 
-                    const tableColumns = columns.map((col, index) => ({
-                        title: col,
-                        dataIndex: col,
-                        key: col,
-                        ellipsis: true,
-                        width: col === "Título" ? "30%" : col === "" ? "2%" : undefined,
-                    }));
-
                     const tableData = filteredRows.map((row, rowIndex) => {
                         let rowData = { key: rowIndex };
                         columns.forEach((colName, colIndex) => {
@@ -109,7 +105,7 @@ export const handleFileMassiveImport = (file, setterFunction) => {
                         return rowData;
                     });
 
-                    setterFunction({ columns: tableColumns, data: tableData });
+                    setterFunction(tableData);
                     console.log("Data ", tableData)
                 }
             };

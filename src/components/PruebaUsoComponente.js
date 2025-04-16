@@ -11,14 +11,68 @@ import { FinishedProcess } from "sysone-endpoints-demo";
 import { DataSelectedCard } from "./data-selected-card/DataSelectedCard";
 // import { DataSelectedCard } from "sysone-endpoints-demo"
 import { InboxOutlined, UserOutlined } from "@ant-design/icons";
-import { downloadTemplate, handleFileMassiveImport } from "sysone-endpoints-demo"
-
+import { downloadTemplate, handleFileMassiveImport } from "sysone-endpoints-demo";
 
 function PruebaUsoComponente() {
     const [visible, setVisible] = useState(true);
     const { t } = useTranslation();
     const [excelFile, setExcelFile] = useState(null);
-    const [excelData, setExcelData] = useState(null);
+    const [excelData, setExcelData] = useState([
+        {
+            key: '1',
+            practica: 'Abogado',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+        {
+            key: '2',
+            practica: 'Abogado',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+        {
+            key: '3',
+            practica: 'Abogado',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+        {
+            key: '4',
+            practica: 'Abogado',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+        {
+            key: '5',
+            practica: 'Desarrollador',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+        {
+            key: '6',
+            practica: 'Desarrollador',
+            nombre: '',
+            apellido: '',
+            sexo: '',
+            tipoDocumento: '',
+            nroDocumento: '',
+        },
+    ])
 
     const { Dragger } = Upload;
     const props = {
@@ -81,8 +135,8 @@ function PruebaUsoComponente() {
         })),
         {
             title: 'Acciones',
-            dataIndex: 'acciones',
-            key: 'acciones',
+            dataIndex: 'actions',
+            key: 'actions',
             width: "12%",
             render: (record) => <Button type="link">Detalle</Button>,
             onCell: (_, index) => ({ style: { padding: ".35rem 0 0 .5rem" } }),
@@ -172,25 +226,23 @@ function PruebaUsoComponente() {
             )} */}
 
             <div style={{ flex: ".8 1" }}>
-                {
-                    !excelData ? (
-                        <Dragger {...props}>
-                            <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">
-                                Clickear en esta area o arrastrar un archivo para subirlo!
-                            </p>
-                            <p className="ant-upload-hint">
-                                Soporta un unico archivo a la vez.
-                            </p>
-                        </Dragger>
-                    ) : null
-                }
+
+                <Dragger {...props}>
+                    <p className="ant-upload-drag-icon">
+                        <InboxOutlined />
+                    </p>
+                    <p className="ant-upload-text">
+                        Clickear en esta area o arrastrar un archivo para subirlo!
+                    </p>
+                    <p className="ant-upload-hint">
+                        Soporta un unico archivo a la vez.
+                    </p>
+                </Dragger>
+
 
                 <Table
                     columns={columns}
-                    dataSource={excelData?.data || null}
+                    dataSource={excelData || null}
                     bordered
                     size="small"
                 />
@@ -199,7 +251,7 @@ function PruebaUsoComponente() {
 
 
             <Button onClick={() => downloadTemplate(columns.filter((c) => c.key !== "key"
-                && c.key !== "acciones"))}>Descargar plantilla</Button>
+                && c.key !== "acciones"), excelData)}>Descargar plantilla</Button>
         </div>
     );
 }
