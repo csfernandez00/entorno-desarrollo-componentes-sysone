@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { PartySearch } from "./party-search/PartySearch";
-// import { PartySearch } from 'sysone-endpoints-demo';
+//import { PartySearch } from "./party-search/PartySearch";
+import { PartySearch } from 'sysone-endpoints-demo';
 import { useTranslation } from "../contexts/translationContext";
 // import { CommercialStructureSearch } from './commercial-structure/CommercialStructureSearch';
-import { Button, Col, message, Row, Table, Upload } from "antd";
+import { Button, Col, DatePicker, Form, message, Row, Table, Upload } from "antd";
 import { CommercialStructureSearch } from "sysone-endpoints-demo";
 import { PaymentMethods } from "./payment-methods/PaymentMethods";
 // import { FinishedProcess } from './finished-process/FinishedProcess';
@@ -11,12 +11,16 @@ import { FinishedProcess } from "sysone-endpoints-demo";
 import { DataSelectedCard } from "./data-selected-card/DataSelectedCard";
 // import { DataSelectedCard } from "sysone-endpoints-demo"
 import { InboxOutlined, UserOutlined } from "@ant-design/icons";
-import { downloadTemplate, handleFileMassiveImport } from "sysone-endpoints-demo";
+import { downloadTemplate, handleFileMassiveImport } from "./massive-import/MassiveImport";
+import moment from "moment";
+// import { downloadTemplate, handleFileMassiveImport } from "sysone-endpoints-demo";
 
 function PruebaUsoComponente() {
     const [visible, setVisible] = useState(true);
     const { t } = useTranslation();
     const [excelFile, setExcelFile] = useState(null);
+    const [form] = Form.useForm();
+    const [importedData, setImportedData] = useState(null)
     const [excelData, setExcelData] = useState([
         {
             key: '1',
@@ -26,6 +30,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: null
         },
         {
             key: '2',
@@ -35,6 +40,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: null
         },
         {
             key: '3',
@@ -44,6 +50,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: null
         },
         {
             key: '4',
@@ -53,6 +60,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: null
         },
         {
             key: '5',
@@ -62,6 +70,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: moment().format("DD/MM/YYYY")
         },
         {
             key: '6',
@@ -71,6 +80,7 @@ function PruebaUsoComponente() {
             sexo: '',
             tipoDocumento: '',
             nroDocumento: '',
+            birthdate: moment().format("DD/MM/YYYY")
         },
     ])
 
@@ -78,7 +88,7 @@ function PruebaUsoComponente() {
     const props = {
         name: "file",
         multiple: false,
-        beforeUpload: (file) => handleFileMassiveImport(file, setExcelData),
+        beforeUpload: (file) => handleFileMassiveImport(file, setImportedData, columns),
         onChange(info) {
             const { status } = info.file;
             if (status === "done") {
@@ -102,6 +112,7 @@ function PruebaUsoComponente() {
         { code: 'firstName', label: "first-name" },
         { code: 'lastName', label: "last-name" },
     ];
+
     const columns = [
         {
             title: '#',
@@ -134,6 +145,40 @@ function PruebaUsoComponente() {
 
         })),
         {
+            title: t('birth-date-lbl'),
+            key: 'birthdate',
+            dataIndex: 'birthdate',
+            type: "date",
+            ellipsis: {
+                showTitle: false,
+            },
+            width: "10%",
+            render: (_value, record) =>
+                <Form.Item
+                    name={[record?.key, "birthdate"]}
+                    rules={[
+                        {
+                            required: true,
+                            message: "",
+                        },
+                    ]}
+                    style={{ borderColor: "transparent", marginBottom: 0 }}
+                >
+                    <DatePicker
+                        format="DD/MM/YYYY"
+                        placeholder=""
+                        style={{ width: "100%", marginBottom: 0 }}
+                        onChange={(date) => {
+                            const newData = [...excelData];
+                            const rowIndex = newData.findIndex((row) => row.key === record.key);
+                            newData[rowIndex].birthdate = date;
+                            setExcelData(newData);
+                        }}
+                    />
+                </Form.Item>,
+            onCell: (_, index) => ({ style: { padding: 0 } }),
+        },
+        {
             title: 'Acciones',
             dataIndex: 'actions',
             key: 'actions',
@@ -144,17 +189,25 @@ function PruebaUsoComponente() {
         },
     ];
 
+    const updateFromImport = (data) => {
+        if (!data?.length) return;
+
+        const valuesToSet = {};
+        data.forEach(row => {
+
+            valuesToSet[row.key] = columns.reduce((acc, col) => {
+                console.log("acc", acc)
+                acc[col.dataIndex] = col.key === "birthdate" ? moment(row[col.key]) : row[col.key];
+                return acc;
+            }, {});
+        });
+
+        form.setFieldsValue(valuesToSet);
+    };
 
     return (
         <div style={{ padding: "5rem" }}>
-            {/* <CommercialStructureSearch
-                visible={visible}
-                setVisible={setVisible}
-                onCommercialStructureSelected={(data) => {
-                    console.log("DATA", data);
-                }} /> 
-
-            {/* {visible &&
+            {/*visible &&
                 <PartySearch
                     onPartySelected={(data) => {
                         console.log("DATA", data);
@@ -164,7 +217,15 @@ function PruebaUsoComponente() {
                     onCancel={() => setVisible(false)}
                     t={t}
                 />
-            } */}
+            }
+            {/* <CommercialStructureSearch
+                visible={visible}
+                setVisible={setVisible}
+                onCommercialStructureSelected={(data) => {
+                    console.log("DATA", data);
+                }} /> 
+
+         
 
             {/* {visible && <PaymentMethods
                 onAddPaymentMethod={(data) => console.log("AGREGANDO", data)}
@@ -226,33 +287,35 @@ function PruebaUsoComponente() {
             )} */}
 
             <div style={{ flex: ".8 1" }}>
+                <Form form={form}>
+                    <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">
+                            Clickear en esta area o arrastrar un archivo para subirlo!
+                        </p>
+                        <p className="ant-upload-hint">
+                            Soporta un unico archivo a la vez.
+                        </p>
+                    </Dragger>
 
-                <Dragger {...props}>
-                    <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
-                    </p>
-                    <p className="ant-upload-text">
-                        Clickear en esta area o arrastrar un archivo para subirlo!
-                    </p>
-                    <p className="ant-upload-hint">
-                        Soporta un unico archivo a la vez.
-                    </p>
-                </Dragger>
 
-
-                <Table
-                    columns={columns}
-                    dataSource={excelData || null}
-                    bordered
-                    size="small"
-                />
-
+                    <Table
+                        columns={columns}
+                        dataSource={excelData || null}
+                        bordered
+                        size="small"
+                    />
+                </Form>
             </div>
 
 
             <Button onClick={() => downloadTemplate(columns.filter((c) => c.key !== "key"
                 && c.key !== "acciones"), excelData)}>Descargar plantilla</Button>
-        </div>
+            <Button onClick={() => updateFromImport(importedData)}>a</Button>
+
+        </div >
     );
 }
 

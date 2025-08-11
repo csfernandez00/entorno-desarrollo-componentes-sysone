@@ -1,18 +1,37 @@
 import * as excelJs from 'exceljs';
 import * as XLSX from "xlsx";
 import { openNotificationWithIcon, TYPE } from '../../utils/notificationToast';
+import moment from 'moment';
+
 
 export const downloadTemplate = async (columns, data = []) => {
     const workbook = new excelJs.Workbook();
     const ws = workbook.addWorksheet('Test Worksheet');
 
+
     const columnHeaders = columns.map((col) => col.dataIndex);
     ws.addRow(columnHeaders);
 
+
     data.forEach((item) => {
         const rowData = columns.map((col) => item[col.dataIndex] ?? '');
-        ws.addRow(rowData);
+        const row = ws.addRow(rowData);
+
+        row.eachCell((cell, colNumber) => {
+            const col = columns[colNumber - 1];
+            if (col.type === 'date' && cell.value) {
+                const rawValue = typeof cell.value === 'string' ? cell.value.replace(/^"(.*)"$/, '$1') : cell.value;
+                const date = moment(rawValue, ["YYYY-MM-DD", "DD/MM/YYYY", "MM/DD/YYYY"], true);
+                if (date.isValid()) {
+                    cell.value = date.toDate();
+                    cell.numFmt = 'dd/mm/yyyy';
+                } else {
+                    cell.value = '';
+                }
+            }
+        });
     });
+
 
     ws.columns.forEach((_, index) => {
         ws.getColumn(index + 1).width = 18;
@@ -65,23 +84,44 @@ export const downloadTemplate = async (columns, data = []) => {
     document.body.removeChild(link);
 };
 
+function excelDateToJSDate(excelDate) {
+    // Excel date 1 = 1900-01-01, pero en JS date 0 = 1970-01-01, por eso sumamos días desde 1899-12-30
+    const daysSinceExcelEpoch = Math.floor(excelDate);
+    const fractionalDay = excelDate - daysSinceExcelEpoch;
+
+    // Fecha base para Excel en JS (30 Dic 1899)
+    const excelEpoch = new Date(1899, 11, 30);
+
+    // Sumar días enteros
+    const date = new Date(excelEpoch.getTime() + daysSinceExcelEpoch * 24 * 60 * 60 * 1000);
+
+    // Sumar la parte fraccional del día (horas, minutos, segundos)
+    const totalSeconds = Math.round(fractionalDay * 24 * 60 * 60);
+    date.setSeconds(date.getSeconds() + totalSeconds);
+
+    return date;
+}
 
 
-export const handleFileMassiveImport = (file, setterFunction) => {
+
+export const handleFileMassiveImport = (file, setterFunction, editableColumns = []) => {
     try {
-        let fileTypes = [
+        const fileTypes = [
             "application/vnd.ms-excel",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             "text/csv",
         ];
+
         if (file && fileTypes.includes(file.type)) {
-            let reader = new FileReader();
+            const reader = new FileReader();
             reader.readAsArrayBuffer(file);
+
             reader.onload = (e) => {
                 const excelFile = e.target.result;
                 const workbook = XLSX.read(excelFile, { type: "buffer" });
                 const selectedSheet = workbook.SheetNames[0];
-                if (excelFile !== null && selectedSheet !== "") {
+
+                if (excelFile && selectedSheet) {
                     const worksheet = workbook.Sheets[selectedSheet];
                     const data = XLSX.utils.sheet_to_json(worksheet, {
                         header: 1,
@@ -92,28 +132,55 @@ export const handleFileMassiveImport = (file, setterFunction) => {
                     const [columns, ...rows] = data;
 
                     const filteredRows = rows.filter(row =>
-                        row.some(cell =>
-                            (typeof cell === "string" ? cell.trim() : cell) !== ""
-                        )
+                        row.some(cell => (typeof cell === "string" ? cell.trim() : cell) !== "")
                     );
 
                     const tableData = filteredRows.map((row, rowIndex) => {
-                        let rowData = { key: rowIndex };
+                        const rowData = { key: rowIndex };
+
                         columns.forEach((colName, colIndex) => {
-                            rowData[colName] = row[colIndex] || "";
+                            let value = row[colIndex] ?? "";
+                            const colMeta = editableColumns.find(col => col.dataIndex === colName);
+
+                            if (colMeta?.type === "date") {
+
+                                if (typeof value === "number") {
+                                    // Es un número Excel: convertir
+                                    const jsDate = excelDateToJSDate(value);
+                                    value = moment(jsDate).toISOString(); // o format que quieras
+                                } else if (typeof value === "string" && value.trim() !== "") {
+                                    // Ya tienes fecha como string, parsear con moment
+                                    const parsed = moment(value, ["DD/MM/YYYY", "YYYY-MM-DD"], true);
+                                    if (parsed.isValid()) {
+                                        value = parsed.toISOString();
+                                    }
+                                }
+                            }
+
+                            rowData[colName] = value;
                         });
+
                         return rowData;
                     });
 
                     setterFunction(tableData);
-                    console.log("Data ", tableData)
+                    console.log("Data importada:", tableData);
                 }
             };
         }
     } catch (error) {
-        openNotificationWithIcon(TYPE.ERROR, error);
+        openNotificationWithIcon(TYPE.ERROR, error.message || error);
+    } finally {
+        return false;
     }
 };
+
+
+
+
+
+
+
 
 
 
