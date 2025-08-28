@@ -214,7 +214,7 @@ function PruebaUsoComponente() {
     }
 
     useEffect(() => {
-        form.setFieldsValue({ addresses: [{ "street": "alem", "addressNumber": "111", "floor": null, "observations": null, "city": "10795", "province": "SAN_LUIS", "postalCode": "5719", "addressType": "HOME" }] })
+        form.setFieldsValue({ addresses: [{ "street": "Andes", "addressNumber": "1530", "floor": null, "observations": null, "city": "1982", "province": "BS_AS", "postalCode": "1832", "addressType": "HOME" }] })
     }, [])
 
 
