@@ -15,9 +15,8 @@ export function ProductProvider({ children }) {
 			dec = input.split(",")[1];
 		}
 		return dec
-			? `${`${ent}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}${
-					value.toString().includes(",") ? "" : ","
-			  }${dec}`
+			? `${`${ent}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}${value.toString().includes(",") ? "" : ","
+			}${dec}`
 			: `${`${ent}`.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`;
 	};
 
