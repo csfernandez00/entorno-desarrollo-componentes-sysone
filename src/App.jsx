@@ -8,7 +8,7 @@ import { ActionsProvider } from "./contexts/actionsContext";
 import Main from "./components/Main";
 //import { axiosInstance } from "sysone-endpoints-demo";
 
-import { axiosInstance } from "sysone-endpoints-demo";
+import { axiosInstance } from "@sysone/components";
 import { ProductProvider } from "./contexts/ProductContext";
 
 export default ({ history, menu }) => {

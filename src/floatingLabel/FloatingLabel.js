@@ -38,8 +38,8 @@ export default function FloatingLabel({
 				{children}
 				<Label
 					hasFocus={value || value === 0.0 || onFocus}
-					//saco para evitar el movimiento: Pedido "GRL- FLoating Label que se mueve"
-					//hasFocus={true}
+				//saco para evitar el movimiento: Pedido "GRL- FLoating Label que se mueve"
+				//hasFocus={true}
 				>
 					{label}
 				</Label>
