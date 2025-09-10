@@ -165,11 +165,16 @@ function Address({ form, name, title, residenceCountryCode = "ARG", onAddressCon
 
 		fetch_address_types();
 
+	}, []);
+
+
+
+	useEffect(() => {
 		if (coordinates) {
 			setNeedAddressConfirmation(false)
 			setAddressConfirmed(true)
 		}
-	}, []);
+	}, [coordinates]);
 
 	useEffect(() => {
 		if (formValues?.[name]?.isDpt) setIsDpt(true);
